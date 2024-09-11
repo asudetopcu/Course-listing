@@ -1,0 +1,129 @@
+.carousel-wrapper {
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+    column-gap: 20px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .carousel-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    max-width: calc(250px * 6 + 10px * 5);
+    margin: 0 auto;
+  }
+
+  .carousel {
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+  }
+
+  .carousel-inner {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+  }
+
+  .carousel-item {
+    min-width: 250px;
+    height: auto;
+    box-sizing: border-box;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    transition: transform 0.3s ease;
+  }
+  
+  .carousel-item:hover {
+    transform: translateY(-5px);
+  }
+
+  .carousel-item img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+  }
+ 
+  .description {
+    text-align: left;
+  }
+  
+  .description h4 {
+    font-size: 16px;
+    margin: 10px 0;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .description p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #666;
+  }
+  
+  .arrow-button {
+    background: #333;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    width: 40px;
+    cursor: pointer;
+    font-size: 18px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+    transition: background-color 0.3s ease;
+    border-radius: 50%;
+  }
+  
+  .arrow-button:hover {
+    background-color: #555;
+  }
+  
+  .prev {
+    left: 10px;
+  }
+  
+  .next {
+    right: 10px;
+  }
+  
+  .arrow-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    opacity: 0.5;
+  }
+  
+  @media screen and (max-width: 1440px) {
+    .carousel-container {
+      max-width: calc(250px * 5 + 10px * 4); 
+    }
+  }
+  
+  @media screen and (max-width: 1024px) {
+    .carousel-container {
+      max-width: calc(250px * 4 + 10px * 3); 
+    }
+  }
+  
+  @media screen and (max-width: 768px) {
+    .carousel-container {
+      max-width: calc(250px * 3 + 10px * 2); 
+    }
+  }
+  
+  @media screen and (max-width: 480px) {
+    .carousel-container {
+      max-width: calc(250px * 2 + 10px * 1); 
+    }
+  }
