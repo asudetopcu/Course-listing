@@ -3,6 +3,12 @@ import './App.css';
 import Carousel from './Carousel.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
+
+const Home = () => <h1>Home Page</h1>;
+const Courses = () => <h1>Courses Page</h1>;
+const About = () => <h1>About Us</h1>;
+const Contact = () => <h1>Contact Us</h1>;
 
 function App() {
   const [coursesData, setCoursesData] = useState([]);
@@ -27,39 +33,49 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <div className='menu-wrapper'>
-        <a className='link' >Home</a>
-        <a className='link' >Courses</a>
-        <a className='link' >About</a>
-        <a className='link' >Contact</a>
-      </div>
-      <div className="carousel-wrapper">
-        {coursesData.map((category) => (
-          <div key={category.id}>
-            {category.courseType.includes('Full Stack Web Development') ? (
-              <h2>
-                <span>Top courses in </span>
-                <a >
-                  {category.courseType}
-                </a>
-              </h2>
-            ) : (
-              <h2>
-                {category.courseType}
-                {category.courseType === "Based on your skill interests, we recommend" && (
-                  <a  className="edit-skill-link">Edit skill interests</a>
+    <Router>
+      <div className="App">
+        <div className='menu-wrapper'>
+          <Link className='link' to="/">Home</Link>
+          <Link className='link' to="/courses">Courses</Link>
+          <Link className='link' to="/about">About</Link>
+          <Link className='link' to="/contact">Contact</Link>
+        </div>
+
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/courses" element={
+            <div className="carousel-wrapper">
+            {coursesData.length > 0 && coursesData.map((category) => (
+              <div key={category.id}>
+                {category.courseType.includes('Full Stack Web Development') ? (
+                  <h2>
+                    <span>Top courses in </span>
+                    <Link to="/courses/full-stack-web-development">
+                      {category.courseType}
+                    </Link>
+                  </h2>
+                ) : (
+                  <h2>
+                    {category.courseType}
+                    {category.courseType === "Based on your skill interests, we recommend" && (
+                      <a className="edit-skill-link">Edit skill interests</a>
+                    )}
+                  </h2>
                 )}
-              </h2>
-            )}
-            <Carousel data={category.courseList.map(course => ({
-                ...course,
-                ratingStars: renderStars(course.rating) 
-              }))} />
+                <Carousel data={category.courseList.map(course => ({
+                  ...course,
+                  ratingStars: renderStars(course.rating)
+                }))} />
+              </div>
+            ))}
           </div>
-        ))}
+          } />
+          <Route path="/about" element={<About />} />
+          <Route path="/contact" element={<Contact />} />
+        </Routes>
       </div>
-    </div>
+    </Router>
   );
 }
 
